@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: d1
+spec:
+  template:
+    metadata:
+      name: pod1
+      labels:
+        app: web1
+        web: app1
+    spec:
+      containers:
+       - name: c1
+         image: ubuntu
+         command: ["/bin/bash",'-c',"while true; do echo hello; sleep 3000; done"]
+         volumeMounts:
+          - name: v1
+            mountPath: /opt/vol1
+       - name: c2
+         image: amazonlinux
+         command: ["/bin/bash",'-c',"while true; do echo hello; sleep 3000; done"]
+         volumeMounts:
+           - name: v1
+             mountPath: /opt/vol2
+
+      volumes:
+        - name: v1
+          emptyDir: {}
+
+  replicas: 4
+  selector:
+    matchLabels:
+      app: web1
+      web: app1
+   
