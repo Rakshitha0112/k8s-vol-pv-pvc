@@ -23,11 +23,10 @@ spec:
          volumeMounts:
            - name: v1
              mountPath: /opt/vol2
-
       volumes:
         - name: v1
-          hostPath:
-            path: /opt/vol
+          persistentVolumeClaim:
+            claimName: pvc1
 
   replicas: 4
   selector:
