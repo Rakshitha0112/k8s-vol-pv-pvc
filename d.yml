@@ -26,7 +26,8 @@ spec:
 
       volumes:
         - name: v1
-          emptyDir: {}
+          hostPath:
+            path: /opt/vol
 
   replicas: 4
   selector:
